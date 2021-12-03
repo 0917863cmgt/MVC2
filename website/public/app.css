@@ -1,6 +1,6 @@
 body{
     background-color: white;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 header{
     height: 100px;
@@ -21,15 +21,16 @@ header{
     z-index: 2;
 }
 #navigation-bar{
+    border-bottom: 1px solid #efefef;
+    background-color: #fafafa;
     position: relative;
     width: 100vw;
-    height:100px;
+    height:75px;
     margin: 0;
     list-style: none;
     display: flex;
     flex-direction: row;
     padding: 0;
-    background-color: #293133;
     justify-content: flex-end;
     max-width: 100%;
 }
@@ -38,11 +39,11 @@ header{
     height: inherit;
     width: 100px;
     margin: 0;
-    color: white;
+    color: black;
     text-align: center;
     align-self: center;
-    line-height: 100px;
-    font-weight: bold;
+    line-height: 75px;
+    font-weight: normal;
 }
 #navigation-bar a{
     text-decoration: none;
@@ -51,37 +52,59 @@ header{
 #navigation-bar a:hover li{
     text-decoration: none;
     color:black;
-    background-color: white;
+    background-color: #ededed;
 }
 #navigation-bar li:active {
     border: #293133;
 }
 #footer {
-    background-color: #293133;
-    position: relative;
+    background-color: #ededed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     max-width: 100%;
     margin: 0;
     height: fit-content;
-    color: white;
+    color: black;
 }
 .footer-h3{
-    text-decoration: underline green;
+    text-decoration: none;
+    margin-bottom: 20px;
+    text-align: center;
 }
-input#footer-submit{
-    text-transform: uppercase;
-    background-color: green;
-    font-family: 'Roboto', sans-serif;
-    border: green 5px solid;
-    margin-top: 15px;
-    color: white;
+#footer-subscribe{
+    max-width: 300px;
+    margin: auto;
+}
+#footer-subscribe label{
+    margin-bottom:5px;
+    margin-left: 25px;
 }
 input#footer-email{
-    width: 100%;
-    background-color: transparent;
-    border: grey solid 1px;
-    border-radius: 3px;
+    width: 200px;
+    max-height: 35px;
+    min-height: 35px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    background-color: white;
+    border: grey solid 0;
+    border-radius: 20px;
+}
+input#footer-submit{
+    display: inline-block;
+    max-width: 90px;
+    max-height: 35px;
+    min-height: 35px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    border: 2px green solid;
+    padding: 5px 10px 5px 10px;
+    color: green;
+    font-size: small;
+    text-decoration: none;
 }
 .n-t-d{
     text-decoration: none;

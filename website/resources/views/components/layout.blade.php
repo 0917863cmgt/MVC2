@@ -18,16 +18,15 @@
 <header>
     <nav id="navigation-top">
         <ul id="navigation-bar" class="container">
-            <a id="tennis-club-logo" href="/"><li>Recipes from Home</li></a>
+            <a id="homepage-link" href="/"><li>Recipes from Home</li></a>
             @auth
-                <a href="/highlights"><li>Highlights</li></a>
-                <a href="/statistics"><li>Statistieken</li></a>
+                <a href="/favourites"><li>Favourites</li></a>
                 <a href="/u/{{auth()->user()->id}}"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->first_name}}!</li></a>
                 <a href="/logout"><li>Log out</li></a>
             @endauth
             @guest
                 <a href="/login"><li>Log in</li></a>
-                <a href="/register"><li>Registreer</li></a>
+                <a href="/register"><li>Register</li></a>
             @endguest
         </ul>
     </nav>
@@ -43,50 +42,19 @@
     <div class="container-fluid px-5">
         <div class="row gx-2">
             <div class="p-3 col-4">
-                <h3 class="footer-h3">Openingstijden Park</h3>
-                <div class="row">
-                    <div class="col-4">
-                        <br>
-                        <p>Maandag:</p>
-                        <p>Dinsdag:</p>
-                        <p>Woensdag:</p>
-                        <p>Donderdag:</p>
-                        <p>Vrijdag:</p>
-                        <p>Zaterdag:</p>
-                        <p>Zondag:</p>
-                    </div>
-                    <div class="col-4">
-                        <br>
-                        <p>12:00-18:00</p>
-                        <p>12:00-18:00</p>
-                        <p>12:00-18:00</p>
-                        <p>12:00-18:00</p>
-                        <p>10:00-20:00</p>
-                        <p>07:00-20:00</p>
-                        <p>12:00-20:00</p>
-                    </div>
-                </div>
+                <h4 class="footer-h3">Links?</h4>
             </div>
-            <div class="p-3 col-4">
-                <h3 class="footer-h3">Contact en Route</h3>
-                <br>
-                <b style="margin-top:50px;">Adres</b>
-                <p>Wijnhaven 14, 3011WN, Rotterdam</p>
-                <b>Telefoon</b>
-                <p>010-0123456</p>
-                <b>Email</b>
-                <p>tennisclub@example.com</p>
-            </div>
-            <div class="p-3 col-4">
-                <h3 class="footer-h3">Schrijf je in voor de nieuwsbrief</h3>
-                <br>
-                <form>
-                    <label for="footer-email">E-mailadres:</label>
+            <div class="p-3 col-4 justify-content-center">
+                <h4 class="footer-h3">Sign up for the newsletter!</h4>
+                <form id="footer-subscribe">
+                    <label for="footer-email">E-mail</label>
                     <br>
-                    <input id="footer-email" name="email" type="email" placeholder="E-mail">
-                    <br>
-                    <input id="footer-submit" name="post" type="submit" value="Aanmelden">
+                    <input id="footer-email" name="email" type="email" placeholder="example@email.com">
+                    <input id="footer-submit" name="post" type="submit" value="Subscribe">
                 </form>
+            </div>
+            <div class="p-3 col-4">
+                <h4 class="footer-h3">Optioneel</h4>
             </div>
         </div>
     </div>
