@@ -15,8 +15,9 @@ class RecipeFactory extends Factory
     public function definition()
     {
         return [
+            'slug' => $this->faker->unique->slug,
             'user_id' => User::factory(),
-            'title' => $this->faker->realTextBetween(30,60),
+            'title' => $this->faker->unique->realTextBetween(30,60),
             'description' => $this->faker->realTextBetween(300, 800),
             'image' => $this->faker->imageUrl,
             'amount_people' => $this->faker->numberBetween(2,12),
