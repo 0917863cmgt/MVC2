@@ -42,7 +42,7 @@
     <div class="container-fluid px-5">
         <div class="row gx-2">
             <div class="p-3 col-4">
-                <h4 class="footer-h3">Links?</h4>
+                <h4 class="footer-h3"></h4>
             </div>
             <div class="p-3 col-4 justify-content-center">
                 <h4 class="footer-h3">Sign up for the newsletter!</h4>
@@ -54,7 +54,7 @@
                 </form>
             </div>
             <div class="p-3 col-4">
-                <h4 class="footer-h3">Optioneel</h4>
+                <h4 class="footer-h3"></h4>
             </div>
         </div>
     </div>

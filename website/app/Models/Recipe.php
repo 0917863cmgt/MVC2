@@ -34,6 +34,26 @@ class Recipe extends Model
         //
     ];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+        $query->where(fn($query) =>
+
+        $query->where('title','like','%' . $search .'%')
+            ->orWhere('description','like','%' . $search .'%')
+        )
+        );
+
+        $query->when($filters['category'] ?? false, fn($query, $category) =>
+        $query->wherehas('categories',fn($query)=>
+        $query->where('category_id', $category))
+        );
+
+        $query->when($filters['author'] ?? false, fn($query, $author) =>
+        $query->whereHas('author',fn($query)=>
+        $query->where('username', $author))
+        );
+    }
+
     public function author(){
         return $this->belongsTo(User::class);
     }

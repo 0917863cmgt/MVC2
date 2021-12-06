@@ -11,7 +11,7 @@ class HomepageController extends Controller
     public function index(){
 
         return view('homepage.index', [
-            'recipes' => Recipe::all(),
+            'recipes' => Recipe::latest()->filter(request(['search', 'category', 'author']))->paginate(8)->withQueryString(),
             'parentCategories' => Category::where('is_parent', true),
             'cuisine' => Category::where('parent_id', 3),
             'course' => Category::where('parent_id', 4),
