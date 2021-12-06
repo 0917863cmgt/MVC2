@@ -15,8 +15,9 @@ class CreateRecipesTable extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->foreignId('user_id')->constrained('users', 'id');
-            $table->string('title', 500);
+            $table->string('title', 500)->unique();
             $table->mediumText('description');
             $table->string('image');
             $table->integer('amount_people');
