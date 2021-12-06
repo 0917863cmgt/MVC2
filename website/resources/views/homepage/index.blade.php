@@ -5,7 +5,7 @@
             <div class="row gx-2">
                <div class="col-12">
                    <h1>Recipes</h1>
-
+                   <x-recipes-header></x-recipes-header>
                    <div class="row">
                        @foreach($recipes as $recipe)
                            <x-recipe-card :recipe="$recipe"></x-recipe-card>
