@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'role',
+        'username',
         'email',
         'password',
+        'profile_image',
     ];
 
     /**
@@ -29,6 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'role',
         'password',
         'remember_token',
     ];
@@ -41,4 +44,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function recipes(){
+        return $this->hasMany(Recipe::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
-
+use App\Models\Recipe;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\RecipeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', [HomepageController::class, 'index']);
+Route::get('/recipe/{recipe:slug}', [RecipeController::class, 'index']);
