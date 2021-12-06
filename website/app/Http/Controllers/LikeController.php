@@ -46,7 +46,7 @@ class LikeController extends Controller
      */
     public function show(Like $like)
     {
-        //
+        return view('likes.show');
     }
 
     /**

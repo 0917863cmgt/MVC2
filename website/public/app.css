@@ -781,8 +781,12 @@ input[type="file"].register-input-file:hover::-webkit-file-upload-button {
         display: none;
     }
 }
+body#user-details {
+    height: 100vh;
+}
 #user-section{
-    margin-bottom: 1em;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
     min-height: 50vh;
 }
 .user-background{

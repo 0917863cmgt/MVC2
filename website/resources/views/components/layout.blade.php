@@ -21,7 +21,7 @@
             <a id="homepage-link" href="/"><li>Recipes from Home</li></a>
             @auth
                 <a href="/favourites"><li>Favourites</li></a>
-                <a href="/u/{{auth()->user()->id}}"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->first_name}}!</li></a>
+                <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->username}}!</li></a>
                 <a href="/logout"><li>Log out</li></a>
             @endauth
             @guest
