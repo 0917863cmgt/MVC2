@@ -21,5 +21,9 @@ Route::get('/', [HomepageController::class, 'index']);
 Route::get('/recipe/{recipe:slug}', [RecipeController::class, 'index']);
 
 Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, 'store'])->middleware('guest');
 
 Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+Route::get('/logout', [SessionController::class, 'destroy'])->middleware('auth');
