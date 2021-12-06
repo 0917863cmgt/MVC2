@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RecipeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
-    public function index()
+    public function index(Recipe $recipe)
     {
-        //
+        return view('recipes.index', [
+            'recipe' => $recipe,
+        ]);
     }
 
     /**
