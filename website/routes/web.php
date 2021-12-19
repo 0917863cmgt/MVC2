@@ -20,10 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [HomepageController::class, 'index']);
+Route::get('/create', [RecipeController::class, 'store']);
 Route::get('/recipe/{recipe:slug}', [RecipeController::class, 'index']);
 
 Route::get('/favourites', [LikeController::class, 'show'])->middleware('auth');
 Route::get('/user-details', [UserController::class, 'show'])->middleware('auth');
+Route::get('/user-details/edit', [UserController::class, 'edit'])->middleware('auth');
 
 Route::get('/login', [SessionController::class, 'create']);
 Route::post('/login', [SessionController::class, 'store'])->middleware('guest');
