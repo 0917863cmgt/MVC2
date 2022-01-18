@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Like;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -22,9 +23,17 @@ class LikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Recipe $recipe)
     {
-        //
+        $attributes = request()->validate([
+            'recipe_id' => 'required|integer|min:1',
+            'comment_id' => 'integer|min:1',
+            'user_id' => 'required|integer|min:1'
+        ]);
+
+        $like = Like::create($attributes);
+
+        return redirect()->back()->with('succes', 'Uw like is succesvol geplaatst!');
     }
 
     /**
@@ -78,8 +87,9 @@ class LikeController extends Controller
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy(Recipe $recipe, Like $like)
     {
-        //
+        Like::destroy($like->id);
+        return  redirect()->back()->with('succes', 'Uw like is succesvol verwijderd!');
     }
 }

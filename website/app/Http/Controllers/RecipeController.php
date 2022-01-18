@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
@@ -15,8 +18,15 @@ class RecipeController extends Controller
      */
     public function index(Recipe $recipe)
     {
+        if(Auth::check()){
+            $id = Auth::id();
+        } else {
+            $id = 0;
+        }
         return view('recipes.index', [
             'recipe' => $recipe,
+            'comments' => Comment::where('recipe_id',$recipe->id)->get(),
+            'likes' =>   Like::where('recipe_id', '=', $recipe->id)
         ]);
     }
 
@@ -27,7 +37,7 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        return view('recipes.create');
     }
 
     /**

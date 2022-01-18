@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomepageController::class, 'index']);
 Route::get('/create', [RecipeController::class, 'store']);
 Route::get('/recipe/{recipe:slug}', [RecipeController::class, 'index']);
+Route::post('/recipe/{recipe:slug}/create', [LikeController::class, 'create']);
+Route::post('/recipe/{recipe:slug}/destroy/{like:id}', [LikeController::class, 'destroy']);
 
 Route::get('/favourites', [LikeController::class, 'show'])->middleware('auth');
 Route::get('/user-details', [UserController::class, 'show'])->middleware('auth');

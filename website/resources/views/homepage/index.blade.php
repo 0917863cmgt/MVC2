@@ -8,7 +8,7 @@
                    <x-recipes-header></x-recipes-header>
                    <div class="row">
                        @foreach($recipes as $recipe)
-                           <x-recipe-card :recipe="$recipe"></x-recipe-card>
+                           <x-recipe.recipe-card :recipe="$recipe"></x-recipe.recipe-card>
                        @endforeach
                        <x-recipes-pagination :recipes="$recipes"/>
                        @if($recipes->count() <1)

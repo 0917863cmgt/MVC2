@@ -811,3 +811,31 @@ body#user-details {
 .user-bottom{
     max-height: 40px;
 }
+.recipe-buttons-container{
+
+}
+.recipe-comments{
+    background-color: lightgrey;
+}
+.recipe-comments{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.comment-banner{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
+}
+.comment-username{
+    color: #262626;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.comment-profile-image{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
