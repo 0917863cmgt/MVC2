@@ -23,6 +23,7 @@ class Recipe extends Model
         'amount_people',
         'ingredients',
         'steps',
+        'published',
     ];
 
     /**
@@ -55,7 +56,7 @@ class Recipe extends Model
     }
 
     public function author(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function categories(){

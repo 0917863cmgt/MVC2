@@ -9,7 +9,7 @@
             <div class="col-6">
                 <h2>Create Recipe</h2>
                 <div class="row">
-                    <form class="register-form" method="POST" action="/create" enctype="multipart/form-data">
+                    <form class="register-form" method="POST" action="/admin/recipes/create" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <label for="slug" style="margin-bottom: 0">Slug:</label>
