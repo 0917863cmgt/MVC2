@@ -20,9 +20,16 @@
         <ul id="navigation-bar" class="container">
             <a id="homepage-link" href="/"><li>Recipes from Home</li></a>
             @auth
-                <a href="/favourites"><li>Favourites</li></a>
-                <a href="/u/{{auth()->user()->id}}"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->first_name}}!</li></a>
-                <a href="/logout"><li>Log out</li></a>
+                @if(auth()->user()->role == 1)
+                    <a href="/admin"><li>Admin</li></a>
+                    <a href="/admin/recipes"><li>Recipes</li></a>
+                    <a href="/admin/users"><li>Users</li></a>
+                    <a href="/logout"><li>Log out</li></a>
+                @else
+                    <a href="/favourites"><li>Favourites</li></a>
+                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->username}}!</li></a>
+                    <a href="/logout"><li>Log out</li></a>
+                @endif
             @endauth
             @guest
                 <a href="/login"><li>Log in</li></a>
@@ -42,7 +49,7 @@
     <div class="container-fluid px-5">
         <div class="row gx-2">
             <div class="p-3 col-4">
-                <h4 class="footer-h3">Links?</h4>
+                <h4 class="footer-h3"></h4>
             </div>
             <div class="p-3 col-4 justify-content-center">
                 <h4 class="footer-h3">Sign up for the newsletter!</h4>
@@ -54,7 +61,7 @@
                 </form>
             </div>
             <div class="p-3 col-4">
-                <h4 class="footer-h3">Optioneel</h4>
+                <h4 class="footer-h3"></h4>
             </div>
         </div>
     </div>

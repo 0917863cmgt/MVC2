@@ -45,6 +45,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function edit(){
+        $attributes = request()->validate([
+            'username' => 'unique',
+            'email' => 'email',
+        ]);
+
+        return redirect('/')->with('succes', 'Your account has been successfully edited.');
+    }
+
     public function recipes(){
         return $this->hasMany(Recipe::class);
     }

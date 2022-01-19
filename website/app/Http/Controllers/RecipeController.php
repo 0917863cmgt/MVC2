@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class RecipeController extends Controller
 {
@@ -13,21 +17,21 @@ class RecipeController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
-    public function index(Recipe $recipe)
+    public function index()
     {
         return view('recipes.index', [
-            'recipe' => $recipe,
+            'recipes' => Recipe::all()
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
     public function create()
     {
-        //
+        return view('recipes.create');
     }
 
     /**
@@ -38,18 +42,48 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = request()->validate([
+            'slug' => ['required',Rule::unique('recipes', 'slug'),'string','min:1'],
+            'title' => ['required',Rule::unique('recipes', 'slug'),'string','min:1'],
+            'description' => 'required|string|min:100',
+            'image' => 'required|image',
+            'amount_people' => 'required|integer|min:1',
+            'ingredients' => 'required',
+            'steps' => 'required',
+        ]);
+
+        $attributes2 = request()->validate([
+            'category' => 'required|integer',
+        ]);
+
+        $attributes['user_id'] = auth()->user()->id;
+        $attributes['image'] = request()->file('image')->store('recipe_images');
+
+        $recipe = Recipe::create($attributes);
+
+        $recipe->categories()->attach($attributes2);
+
+        return redirect('/')->with('succes', 'Uw recept is succesvol geplaatst!');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Recipe  $recipe
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
     public function show(Recipe $recipe)
     {
-        //
+        if(Auth::check()){
+            $id = Auth::id();
+        } else {
+            $id = 0;
+        }
+        return view('recipes.show', [
+            'recipe' => $recipe,
+            'comments' => Comment::where('recipe_id',$recipe->id)->get(),
+            'likes' =>   Like::where('recipe_id', '=', $recipe->id)
+        ]);
     }
 
     /**

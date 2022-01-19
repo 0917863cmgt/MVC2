@@ -61,6 +61,13 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('test'),
         ]);
 
+        $user3 = User::factory()->create([
+            'role' => 1,
+            'username' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('test'),
+        ]);
+
         $recipe1 = Recipe::factory()->hasCategories(4)->create(['user_id' => $user1->id]);
         $recipe2 = Recipe::factory()->hasCategories(4)->create(['user_id' => $user1->id]);
         $recipe3 = Recipe::factory()->hasCategories(4)->create(['user_id' => $user1->id]);
