@@ -13,13 +13,15 @@ class RegisterController extends Controller
 
     public function store(){
         $attributes = request()->validate([
-            'role' => 'required|digits_between:0,4|min:1|max:1',
             'username' => 'required|string|max:50|min:3',
             'email' => 'required|unique:App\Models\User,email|email|max:255',
             'email_confirmation' => 'required|email|max:255|same:email',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|min:8|same:password',
         ]);
+        $attributes['role'] = 3;
+        $attributes['password'] = bcrypt($attributes['password']);
+        $attributes['profile_image'] = request()->file('profile_image')->store('profile_images');
         $user = User::create($attributes);
 
         auth()->login($user);

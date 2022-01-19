@@ -12,12 +12,14 @@
                 <img class="profile-image" alt="avatar" src="{{auth()->user()->profile_image}}">
             </div>
             <div class="col-4 p-3 grey">
-                <form class="edit-user-form" id="edit-user" method="POST" action="/user-details/edit">
+                <form class="edit-user-form" id="edit-user" method="POST" action="/user-details/update/{{auth()->user()->id}}">
+                    @csrf
+                    @method('PATCH')
                     <label for="username" style="margin-bottom: 0">Username:</label>
-                    <input type="text" id="username" placeholder="{{auth()->user()->username}}">
+                    <input name="username" type="text" id="username" value="{{auth()->user()->username}}">
 
                     <label for="email" style="margin-bottom: 0">E-mail:</label>
-                    <input type="email" id="email" placeholder="{{auth()->user()->email}}">
+                    <input name="email" type="email" id="email" value="{{auth()->user()->email}}">
                     <p>Member since: {{auth()->user()->created_at->format('d-m-Y')}}</p>
                     <input class="register-input-submit" type="submit" name="submit" id="submit" value="Submit">
                     @if ($errors->any())
