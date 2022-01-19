@@ -17,7 +17,7 @@ class AdminValidation
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()?->role !=  '1'){
+        if(auth()->user()?->role ==  '3'){
             abort(Response::HTTP_FORBIDDEN);
         }
         return $next($request);
