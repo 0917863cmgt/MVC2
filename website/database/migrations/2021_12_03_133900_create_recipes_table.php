@@ -21,8 +21,9 @@ class CreateRecipesTable extends Migration
             $table->mediumText('description');
             $table->string('image');
             $table->integer('amount_people');
-            $table->json('ingredients');
-            $table->json('steps');
+            $table->mediumText('ingredients')->nullable();
+            $table->mediumText('steps')->nullable();
+            $table->integer('published')->default(0);
             $table->timestamps();
         });
     }
