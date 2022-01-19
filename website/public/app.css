@@ -839,3 +839,141 @@ body#user-details {
     height: 32px;
     border-radius: 50%;
 }
+#favourites{
+    margin:0;
+    min-height: 100vh;
+}
+.favourites-section{
+
+}
+#admin-homepage{
+    margin:0;
+    min-height: 100vh;
+}
+.recipe-list{
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    min-width:100%;
+    margin-bottom:5px;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    padding: 0 10px;
+}
+.recipe-list h5{
+    margin-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.recipe-author{
+    color: #42A5F5;
+    margin-left: auto!important;
+    margin-right: 20px;
+}
+.recipe-active{
+    background-color: #C8E6C9;
+    border: 1px solid #2E7D32;
+    color: #2E7D32;
+    border-radius: 12px;
+    padding: 5px 10px;
+    text-decoration: none;
+    min-width: 60px;
+    max-width: 100px;
+    max-height: 35px;
+    margin-right: 20px;
+}
+.recipe-inactive{
+    background-color: #FFF59D;
+    border: 1px solid #FBC02D;
+    color: #FBC02D;
+    border-radius: 12px;
+    padding: 5px 10px;
+    text-decoration: none;
+    min-width: 60px;
+    max-width: 60px;
+    max-height: 35px;
+    margin-right: 20px;
+}
+.recipe-edit{
+    color: #42A5F5;
+    margin-right: 20px;
+}
+.recipe-edit:hover{
+    color: #1E88E5;
+}
+.recipe-delete{
+    color: #EF5350;
+    margin-right: 10px;
+    background: 0 0;
+    border: 0;
+}
+.recipe-delete:hover{
+    color: #E53935;
+}
+.blue{
+    color: #42A5F5;
+}
+.blue:hover{
+    color: #1E88E5;
+}
+/*slider checkbox css*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
