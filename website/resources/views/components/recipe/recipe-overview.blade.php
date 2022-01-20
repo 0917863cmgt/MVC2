@@ -1,5 +1,5 @@
 @props(['recipe', 'likes'])
-<img src="{{$recipe->image}}" style="max-width: inherit; max-height: 400px;margin-bottom: 10px">
+<img src="{{asset('storage/' . $recipe->image)}}" style="max-width: inherit; max-height: 400px;margin-bottom: 10px; object-fit: cover;">
 {{--{{dd($hasLike, $recipe->id)}}--}}
 <x-recipe.recipe-buttons
     :recipe="$recipe"
