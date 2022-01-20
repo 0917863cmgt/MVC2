@@ -6,6 +6,7 @@ use App\Models\Like;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class LikesValidation
 {
@@ -22,8 +23,10 @@ class LikesValidation
             $id = Auth::id();
             $count = Like::whereNotNull('recipe_id')->whereNull('comment_id')->where('user_id', '=', $id)->count();
             if( $count < 5){
-                redirect()->back();
+                abort(Response::HTTP_FORBIDDEN);
             }
+        } else {
+            abort(Response::HTTP_FORBIDDEN);
         }
         return $next($request);
     }
