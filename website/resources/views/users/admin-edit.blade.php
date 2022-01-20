@@ -36,7 +36,7 @@
                     <label class="register-label" for="confirm_password">Bevestig wachtwoord</label>
                     <input class="register-input-password" type="password" name="password_confirmation" id="password_confirmation" required>
 
-                    <label class="register-label" for="profile_image" style="margin-bottom: 0">Image:</label>
+                    <label class="register-label" for="profile_image" style="margin-bottom: 0">Profile image:</label>
                     <img src="{{ asset('storage/' . $user->profile_image) }}" alt="" style="width: 100px;height: 100px;border-radius: 12px;object-fit: contain">
                     <input name="profile_image" type="file" id="profile_image">
 
