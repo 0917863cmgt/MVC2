@@ -21,7 +21,6 @@ class RegisterController extends Controller
         ]);
         $attributes['role'] = 3;
         $attributes['password'] = bcrypt($attributes['password']);
-        $attributes['profile_image'] = request()->file('profile_image')->store('profile_images');
         $user = User::create($attributes);
 
         auth()->login($user);
