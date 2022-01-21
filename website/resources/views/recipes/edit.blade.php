@@ -9,7 +9,7 @@
             <div class="col-6">
                 <h2>Edit Recipe</h2>
                 <div class="row">
-                    <form class="register-form" method="POST" action="/admin/recipes/update/{{$recipe->slug}}" enctype="multipart/form-data">
+                    <form class="register-form" method="POST" action="/recipes/update/{{$recipe->slug}}" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <label for="published" style="margin-bottom: 0">Published:</label>
@@ -47,8 +47,8 @@
                         <label for="steps" style="margin-bottom: 0">Steps:</label>
                         <textarea name="steps" id="steps">{{$recipe->steps}}</textarea>
 
-                        <label for="categories" style="margin-bottom: 0">Categories:</label>
-                        <select name="categories" id="categories" multiple>
+                        <label for="category" style="margin-bottom: 0">Categories:</label>
+                        <select name="categories[]" id="categories" multiple="multiple">
                             @foreach($recipeCategories as $cat)
                                 <option value="{{$cat->id}}" selected="selected">{{$cat->name}}</option>
                                 @foreach($categories as $category)

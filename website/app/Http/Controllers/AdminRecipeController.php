@@ -38,23 +38,18 @@ class AdminRecipeController extends Controller
             'amount_people' => 'required|integer|min:1',
             'ingredients' => 'required|string',
             'steps' => 'required|string',
+            'categories' => 'required'
         ]);
 
-        $attributes2 = request()->validate([
-            'category' => 'required|integer',
-        ]);
         $attributes['user_id'] = auth()->user()->id;
         $attributes['image'] = request()->file('image')->store('images');
         $attributes['published'] = 0;
 
         $recipe = Recipe::create($attributes);
 
-        $attributes2['recipe_id'] = $recipe->id;
-        $recipe->categories()->attach($attributes2);
-//        foreach ($attributes2['categories'] as $attributes3){
-//            $attributes3['recipe_id'] = $recipe->id;
-//            $recipe->categories()->attach($attributes3);
-//        }
+        foreach($attributes['categories'] as $category){
+            $recipe->categories()->attach($category);
+        }
         return redirect('/recipes')->with('succes', 'Uw recept is succesvol geplaatst!');
     }
     public function edit(Recipe $recipe){
@@ -73,7 +68,8 @@ class AdminRecipeController extends Controller
             'amount_people' => 'required|integer|min:1',
             'ingredients' => 'required|string',
             'steps' => 'required|string',
-            'published' => 'integer|min:1'
+            'published' => 'integer|min:1',
+            'categories' => 'required',
         ]);
 
         if(isset($attributes['image'])){
@@ -81,6 +77,11 @@ class AdminRecipeController extends Controller
         }
 
         $recipe->update($attributes);
+
+        $recipe->categories()->detach();
+        foreach($attributes['categories'] as $category){
+            $recipe->categories()->attach($category);
+        }
 
         return redirect('/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
     }
