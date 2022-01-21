@@ -3,7 +3,9 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminValidation;
+use App\Http\Middleware\CommentValidation;
 use App\Http\Middleware\LikesValidation;
+use App\Http\Middleware\ModeratorValidation;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -60,9 +62,11 @@ class Kernel extends HttpKernel
         'admin' => AdminValidation::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'commentLikes' => CommentValidation::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'likes' => LikesValidation::class,
+        'moderator' => ModeratorValidation::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
