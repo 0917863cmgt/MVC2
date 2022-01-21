@@ -25,16 +25,16 @@
                     <a href="/recipes"><li>Recipes</li></a>
                     <a href="/categories"><li>Categories</li></a>
                     <a href="/admin/users"><li>Users</li></a>
-                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->username}}!</li></a>
+                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere;width: 200px;">Welcome {{auth()->user()->username}}!</li></a>
                     <a href="/logout"><li>Log out</li></a>
                 @elseif(auth()->user()->role == 2)
                     <a href="/recipes"><li>Recipes</li></a>
                     <a href="/categories"><li>Categories</li></a>
-                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->username}}!</li></a>
+                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere;width: 200px;">Welcome {{auth()->user()->username}}!</li></a>
                     <a href="/logout"><li>Log out</li></a>
                 @else
                     <a href="/favourites"><li>Favourites</li></a>
-                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->username}}!</li></a>
+                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere;width: 200px;">Welcome {{auth()->user()->username}}!</li></a>
                     <a href="/logout"><li>Log out</li></a>
                 @endif
             @endauth

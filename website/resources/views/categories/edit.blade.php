@@ -7,7 +7,7 @@
         </a>
         <div class="row gx-2 justify-content-center">
             <div class="col-4">
-                <h2>Edit Recipe</h2>
+                <h2>Edit Category</h2>
                 <form class="register-form" id="register-create" method="POST" action="/categories/update/{{$category->slug}}">
                     @csrf
                     @method('PATCH')
