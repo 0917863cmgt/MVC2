@@ -19,7 +19,7 @@ class ModeratorValidation
     public function handle(Request $request, Closure $next)
     {
         if(auth()->user()?->role ==  '3' || !Auth::check()){
-            return redirect('/')->with('fail', 'Foute bestaat niet');
+            return redirect('/')->with('fail', 'Route bestaat niet');
         }
         return $next($request);
     }
