@@ -9,7 +9,7 @@
         {{--        </div>--}}
         <div class="row bio">
             <div class="col-4 offset-3">
-                <img class="profile-image" alt="avatar" src="{{auth()->user()->profile_image}}">
+                <img class="profile-image" alt="avatar" src="{{ asset('storage/' . auth()->user()->profile_image) }}">
             </div>
             <div class="col-4 p-3 grey">
                 <form class="edit-user-form" id="edit-user" method="POST" action="/user-details/update/{{auth()->user()->id}}" enctype="multipart/form-data" style="display: flex;
