@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminRecipeController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\RegisterController;
@@ -60,13 +61,20 @@ Route::middleware(['auth','xss'])->group(function (){
 });
 
 Route::middleware(['moderator','xss'])->group(function (){
-    Route::get('/recipes/', [AdminRecipeController::class, 'index']);
+    Route::get('/recipes', [AdminRecipeController::class, 'index']);
     Route::get('/recipes/create', [AdminRecipeController::class, 'create']);
     Route::post('/recipes/create', [AdminRecipeController::class, 'store']);
     Route::get('/recipes/edit/{recipe:slug}', [AdminRecipeController::class, 'edit']);
     Route::patch('/recipes/update/{recipe:slug}', [AdminRecipeController::class, 'update']);
     Route::patch('/recipes/published/update/{recipe:slug}', [AdminRecipeController::class, 'published']);
     Route::delete('/recipes/delete/{recipe:slug}', [AdminRecipeController::class, 'destroy']);
+
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/create', [CategoryController::class, 'create']);
+    Route::post('/categories/create', [CategoryController::class, 'store']);
+    Route::get('/categories/edit/{category:slug}', [CategoryController::class, 'edit']);
+    Route::patch('/categories/update/{category:slug}', [CategoryController::class, 'update']);
+    Route::delete('/categories/delete/{category:slug}', [CategoryController::class, 'destroy']);
 });
 
 Route::middleware(['admin','xss'])->group(function (){
