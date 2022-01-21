@@ -12,6 +12,9 @@
             @if(request('course'))
                 <input type="hidden" name="category" placeholder="" value="{{request('course')}}">
             @endif
+            @if(request('parent'))
+                <input type="hidden" name="category" placeholder="" value="{{request('parent')}}">
+            @endif
         <input type="text" name="search" placeholder="Search..." class="article-searchbar">
     </form>
 </div>
