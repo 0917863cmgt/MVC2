@@ -10,7 +10,7 @@
                 <div class="row gx-2 justify-content-center">
                     <div class="col-8">
                         <h2 style="margin-top: 50px;margin-bottom: 20px; width: 200px;">All Recipes</h2>
-                        <a href="/admin/recipes/create" class="n-t-d blue" style="float: right">Create Recipe</a>
+                        <a href="/recipes/create" class="n-t-d blue" style="float: right">Create Recipe</a>
                     </div>
                     @foreach($recipes as $recipe)
                         <div class="col-8">

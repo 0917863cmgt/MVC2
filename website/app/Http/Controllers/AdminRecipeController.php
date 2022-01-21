@@ -55,7 +55,7 @@ class AdminRecipeController extends Controller
 //            $attributes3['recipe_id'] = $recipe->id;
 //            $recipe->categories()->attach($attributes3);
 //        }
-        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol geplaatst!');
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol geplaatst!');
     }
     public function edit(Recipe $recipe){
         return view('recipes.edit', [
@@ -82,13 +82,13 @@ class AdminRecipeController extends Controller
 
         $recipe->update($attributes);
 
-        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
     }
 
     public function destroy(Recipe $recipe){
         $recipe->categories()->detach();
         $recipe->delete();
-        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol verwijderd!');
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol verwijderd!');
     }
 
     public function published(Recipe $recipe){
@@ -100,6 +100,6 @@ class AdminRecipeController extends Controller
 
         $recipe->update($attributes);
 
-        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
     }
 }
