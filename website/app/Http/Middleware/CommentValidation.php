@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class LikesValidation
+class CommentValidation
 {
     /**
      * Handle an incoming request.
@@ -21,9 +21,9 @@ class LikesValidation
     {
         if(Auth::check()){
             $id = Auth::id();
-            $count = Like::whereNotNull('recipe_id')->whereNull('comment_id')->where('user_id', '=', $id)->count();
+            $count = Like::whereNotNull('recipe_id')->whereNotNull('comment_id')->where('user_id', '=', $id)->count();
             if( $count < 5){
-                return back()->with('fail', 'U moet ' . (5-$count) . ' extra recepten liken om een recept te plaatsen!');
+                return back()->with('fail', 'U moet ' . (5-$count) . ' extra comments liken om een comment te plaatsen!');
             }
         } else {
             return back()->with('fail', 'U moet ingelogd zijn om een comment te plaatsen');

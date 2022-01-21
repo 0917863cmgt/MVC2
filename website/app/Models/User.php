@@ -45,13 +45,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function edit(){
-        $attributes = request()->validate([
-            'username' => 'unique',
-            'email' => 'email',
-        ]);
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+        $query->where(fn($query) =>
 
-        return redirect('/')->with('succes', 'Your account has been successfully edited.');
+        $query->where('username','like','%' . $search .'%'))
+        );
+
+        $query->when($filters['role'] ?? false, fn($query, $role) =>
+        $query->where('role', '=', $role)
+        );
     }
 
     public function recipes(){

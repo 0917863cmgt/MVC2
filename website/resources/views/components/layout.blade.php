@@ -22,12 +22,19 @@
             @auth
                 @if(auth()->user()->role == 1)
                     <a href="/admin"><li>Admin</li></a>
-                    <a href="/admin/recipes"><li>Recipes</li></a>
+                    <a href="/recipes"><li>Recipes</li></a>
+                    <a href="/categories"><li>Categories</li></a>
                     <a href="/admin/users"><li>Users</li></a>
+                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere;width: 200px;">Welcome {{auth()->user()->username}}!</li></a>
+                    <a href="/logout"><li>Log out</li></a>
+                @elseif(auth()->user()->role == 2)
+                    <a href="/recipes"><li>Recipes</li></a>
+                    <a href="/categories"><li>Categories</li></a>
+                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere;width: 200px;">Welcome {{auth()->user()->username}}!</li></a>
                     <a href="/logout"><li>Log out</li></a>
                 @else
                     <a href="/favourites"><li>Favourites</li></a>
-                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere">Welcome {{auth()->user()->username}}!</li></a>
+                    <a href="/user-details"><li style="font-size:x-small;word-wrap: anywhere;width: 200px;">Welcome {{auth()->user()->username}}!</li></a>
                     <a href="/logout"><li>Log out</li></a>
                 @endif
             @endauth
@@ -42,7 +49,7 @@
     <p id="hideMe" class="flash-message">{{session('succes') ?? 'Geen succes flash message in session gevonden'}}</p>
 
 @elseif(session()->has('fail'))
-    <p id="hideMe" class="flash-message" style="background-color: darkred;color: black">{{session('fail') ?? 'Geen succes flash message in session gevonden'}}</p>
+    <p id="hideMe" class="flash-message" style="background-color: #F44336;color: black">{{session('fail') ?? 'Geen succes flash message in session gevonden'}}</p>
 @endif
 @yield('content')
 <footer id="footer" class="row">

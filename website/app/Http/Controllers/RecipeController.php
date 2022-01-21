@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Recipe;
@@ -31,7 +32,9 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        return view('recipes.create');
+        return view('recipes.create', [
+            'categories' => Category::where('is_parent', '=', 0)->get(),
+        ]);
     }
 
     /**
@@ -50,10 +53,7 @@ class RecipeController extends Controller
             'amount_people' => 'required|integer|min:1',
             'ingredients' => 'required',
             'steps' => 'required',
-        ]);
-
-        $attributes2 = request()->validate([
-            'category' => 'required|integer',
+            'categories' => 'required',
         ]);
 
         $attributes['user_id'] = auth()->user()->id;
@@ -61,7 +61,9 @@ class RecipeController extends Controller
 
         $recipe = Recipe::create($attributes);
 
-        $recipe->categories()->attach($attributes2);
+        foreach($attributes['categories'] as $category){
+            $recipe->categories()->attach($category);
+        }
 
         return redirect('/')->with('succes', 'Uw recept is succesvol geplaatst!');
     }

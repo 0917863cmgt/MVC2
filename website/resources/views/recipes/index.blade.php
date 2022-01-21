@@ -10,7 +10,10 @@
                 <div class="row gx-2 justify-content-center">
                     <div class="col-8">
                         <h2 style="margin-top: 50px;margin-bottom: 20px; width: 200px;">All Recipes</h2>
-                        <a href="/admin/recipes/create" class="n-t-d blue" style="float: right">Create Recipe</a>
+                        <a href="/recipes/create" class="n-t-d blue" style="float: right">Create Recipe</a>
+                    </div>
+                    <div class="col-12">
+                        <x-recipes-header></x-recipes-header>
                     </div>
                     @foreach($recipes as $recipe)
                         <div class="col-8">
@@ -20,6 +23,12 @@
                             </x-recipe.recipe-list>
                         </div>
                     @endforeach
+                    <x-recipes-pagination :recipes="$recipes"/>
+                    @if($recipes->count() <1)
+                        <div class="col-6 offset-3 no-articles" style="height: calc(40vh - 150px);">
+                            <p style="text-align: center;">No recipes found!</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

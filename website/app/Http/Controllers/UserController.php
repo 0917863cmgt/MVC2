@@ -19,13 +19,13 @@ class UserController extends Controller
     public function update(User $user){
         $attributes = request()->validate([
             'username' => 'string|max:50|min:3',
-            'email' => ['required', Rule::unique('users', 'email')->ignore($user->id), 'email', 'max:255'],
-            'email_confirmation' => ['required', 'email', 'same:email', 'max:255'],
-            'password' => 'required|min:8',
-            'password_confirmation' => 'required|min:8|same:password',
+            'email' => [Rule::unique('users', 'email')->ignore($user->id), 'email', 'max:255'],
+            'email_confirmation' => ['email', 'same:email', 'max:255'],
+            'password' => 'min:8',
+            'password_confirmation' => 'min:8|same:password',
             'profile_image' => 'image',
         ]);
-        $attributes['role'] = 3;
+        $attributes['role'] = auth()->user()->role;
         $attributes['password'] = bcrypt($attributes['password']);
         if(isset( $attributes['profile_image'])){
             $attributes['profile_image'] = request()->file('profile_image')->store('profile_images');

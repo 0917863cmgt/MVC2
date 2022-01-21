@@ -9,7 +9,7 @@
             <div class="col-6">
                 <h2>Create Recipe</h2>
                 <div class="row">
-                    <form class="register-form" method="POST" action="/admin/recipes/create" enctype="multipart/form-data">
+                    <form class="register-form" method="POST" action="/recipes/create" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <label for="slug" style="margin-bottom: 0">Slug:</label>
@@ -33,8 +33,8 @@
                         <label for="steps" style="margin-bottom: 0">Steps:</label>
                         <textarea name="steps" id="steps"></textarea>
 
-                        <label for="category" style="margin-bottom: 0">Categories:</label>
-                        <select name="category" id="category" multiple>
+                        <label for="categories[]" style="margin-bottom: 0">Categories:</label>
+                        <select name="categories[]" id="category" multiple>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach

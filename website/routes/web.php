@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminRecipeController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -22,37 +24,66 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [HomepageController::class, 'index']);
-Route::get('/create', [RecipeController::class, 'create'])->middleware('likes');
-Route::post('/create', [RecipeController::class, 'store'])->middleware('likes');
-Route::get('/recipe/{recipe:slug}', [RecipeController::class, 'show']);
-Route::post('/recipe/{recipe:slug}/create', [LikeController::class, 'store']);
-Route::post('/recipe/{recipe:slug}/destroy/{like:id}', [LikeController::class, 'destroy']);
+Route::middleware(['xss'])->group(function (){
+    Route::get('/', [HomepageController::class, 'index']);
 
-Route::get('/favourites', [LikeController::class, 'index'])->middleware('auth');
-Route::get('/user-details', [UserController::class, 'show'])->middleware('auth');
-Route::get('/user-details/edit', [UserController::class, 'edit'])->middleware('auth');
-Route::patch('/user-details/update/{user}', [UserController::class, 'update'])->middleware('auth');
+    Route::get('/recipe/{recipe:slug}', [RecipeController::class, 'show']);
+    Route::post('/recipe/{recipe:slug}/create', [LikeController::class, 'store']);
+    Route::post('/recipe/{recipe:slug}/destroy/{like:id}', [LikeController::class, 'destroy']);
+});
 
-Route::get('/login', [SessionController::class, 'create']);
-Route::post('/login', [SessionController::class, 'store'])->middleware('guest');
+Route::middleware(['guest','xss'])->group(function (){
+    Route::get('/login', [SessionController::class, 'create'])->name('login');
+    Route::post('/login', [SessionController::class, 'store']);
 
-Route::get('/register', [RegisterController::class, 'create']);
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+    Route::get('/register', [RegisterController::class, 'create']);
+    Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/logout', [SessionController::class, 'destroy'])->middleware('auth');
+});
 
-Route::get('/admin', [AdminController::class, 'index'])->middleware('admin');
-Route::get('/admin/recipes/', [AdminRecipeController::class, 'index'])->middleware('admin');
-Route::get('/admin/recipes/create', [AdminRecipeController::class, 'create'])->middleware('admin');
-Route::post('/admin/recipes/create', [AdminRecipeController::class, 'store'])->middleware('admin');
-Route::get('/admin/recipes/edit/{recipe:slug}', [AdminRecipeController::class, 'edit'])->middleware('admin');
-Route::patch('/admin/recipes/update/{recipe:slug}', [AdminRecipeController::class, 'update'])->middleware('admin');
-Route::delete('/admin/recipes/delete/{recipe:slug}', [AdminRecipeController::class, 'destroy'])->middleware('admin');
+Route::middleware(['auth', 'commentLikes','xss'])->group(function (){
+    Route::post('/recipe/{recipe:slug}/comment/create', [CommentController::class, 'store']);
+});
 
-Route::get('/admin/users', [AdminUserController::class, 'index'])->middleware('admin');
-Route::get('/admin/users/create', [AdminUserController::class, 'create'])->middleware('admin');
-Route::post('/admin/users/create', [AdminUserController::class, 'store'])->middleware('admin');
-Route::get('/admin/users/edit/{user:username}', [AdminUserController::class, 'edit'])->middleware('admin');
-Route::patch('/admin/users/update/{user:username}', [AdminUserController::class, 'update'])->middleware('admin');
-Route::delete('/admin/users/delete/{user:username}', [AdminUserController::class, 'destroy'])->middleware('admin');
+Route::middleware(['auth','likes','xss'])->group(function (){
+    Route::get('/create', [RecipeController::class, 'create']);
+    Route::post('/create', [RecipeController::class, 'store']);
+});
+
+Route::middleware(['auth','xss'])->group(function (){
+    Route::get('/favourites', [LikeController::class, 'index']);
+
+    Route::get('/user-details', [UserController::class, 'show']);
+    Route::get('/user-details/edit', [UserController::class, 'edit']);
+    Route::patch('/user-details/update/{user}', [UserController::class, 'update']);
+
+    Route::get('/logout', [SessionController::class, 'destroy']);
+});
+
+Route::middleware(['moderator','xss'])->group(function (){
+    Route::get('/recipes', [AdminRecipeController::class, 'index']);
+    Route::get('/recipes/create', [AdminRecipeController::class, 'create']);
+    Route::post('/recipes/create', [AdminRecipeController::class, 'store']);
+    Route::get('/recipes/edit/{recipe:slug}', [AdminRecipeController::class, 'edit']);
+    Route::patch('/recipes/update/{recipe:slug}', [AdminRecipeController::class, 'update']);
+    Route::patch('/recipes/published/update/{recipe:slug}', [AdminRecipeController::class, 'published']);
+    Route::delete('/recipes/delete/{recipe:slug}', [AdminRecipeController::class, 'destroy']);
+
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/create', [CategoryController::class, 'create']);
+    Route::post('/categories/create', [CategoryController::class, 'store']);
+    Route::get('/categories/edit/{category:slug}', [CategoryController::class, 'edit']);
+    Route::patch('/categories/update/{category:slug}', [CategoryController::class, 'update']);
+    Route::delete('/categories/delete/{category:slug}', [CategoryController::class, 'destroy']);
+});
+
+Route::middleware(['admin','xss'])->group(function (){
+    Route::get('/admin', [AdminController::class, 'index']);
+
+    Route::get('/admin/users', [AdminUserController::class, 'index']);
+    Route::get('/admin/users/create', [AdminUserController::class, 'create']);
+    Route::post('/admin/users/create', [AdminUserController::class, 'store']);
+    Route::get('/admin/users/edit/{user:username}', [AdminUserController::class, 'edit']);
+    Route::patch('/admin/users/update/{user:username}', [AdminUserController::class, 'update']);
+    Route::delete('/admin/users/delete/{user:username}', [AdminUserController::class, 'destroy']);
+});

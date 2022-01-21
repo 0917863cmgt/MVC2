@@ -31,7 +31,7 @@ class CategoryComponent extends Component
             'course' => Category::where('parent_id', 4),
             'protein' => Category::where('parent_id', 1),
             'vegetables' => Category::where('parent_id', 2),
-            'category' => Category::firstWhere('slug', request('category')),
+            'categories' => Category::firstWhere('slug', request('categories')),
         ]);
     }
 }

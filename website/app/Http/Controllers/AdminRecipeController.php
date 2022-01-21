@@ -12,7 +12,7 @@ class AdminRecipeController extends Controller
     public function index()
     {
         return view('recipes.index', [
-            'recipes' => Recipe::all()
+            'recipes' => Recipe::latest()->filter(request(['search', 'categories', 'author']))->paginate(10)->withQueryString()
         ]);
     }
 
@@ -38,24 +38,19 @@ class AdminRecipeController extends Controller
             'amount_people' => 'required|integer|min:1',
             'ingredients' => 'required|string',
             'steps' => 'required|string',
+            'categories' => 'required'
         ]);
 
-        $attributes2 = request()->validate([
-            'category' => 'required|integer',
-        ]);
         $attributes['user_id'] = auth()->user()->id;
         $attributes['image'] = request()->file('image')->store('images');
         $attributes['published'] = 0;
 
         $recipe = Recipe::create($attributes);
 
-        $attributes2['recipe_id'] = $recipe->id;
-        $recipe->categories()->attach($attributes2);
-//        foreach ($attributes2['categories'] as $attributes3){
-//            $attributes3['recipe_id'] = $recipe->id;
-//            $recipe->categories()->attach($attributes3);
-//        }
-        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol geplaatst!');
+        foreach($attributes['categories'] as $category){
+            $recipe->categories()->attach($category);
+        }
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol geplaatst!');
     }
     public function edit(Recipe $recipe){
         return view('recipes.edit', [
@@ -73,7 +68,8 @@ class AdminRecipeController extends Controller
             'amount_people' => 'required|integer|min:1',
             'ingredients' => 'required|string',
             'steps' => 'required|string',
-            'published' => 'integer|min:1'
+            'published' => 'integer|min:1',
+            'categories' => 'required',
         ]);
 
         if(isset($attributes['image'])){
@@ -82,12 +78,29 @@ class AdminRecipeController extends Controller
 
         $recipe->update($attributes);
 
-        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
+        $recipe->categories()->detach();
+        foreach($attributes['categories'] as $category){
+            $recipe->categories()->attach($category);
+        }
+
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
     }
 
     public function destroy(Recipe $recipe){
         $recipe->categories()->detach();
         $recipe->delete();
-        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol verwijderd!');
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol verwijderd!');
+    }
+
+    public function published(Recipe $recipe){
+        if($recipe->published == 1){
+            $attributes['published'] = 0;
+        } else {
+            $attributes['published'] = 1;
+        }
+
+        $recipe->update($attributes);
+
+        return redirect('/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
     }
 }

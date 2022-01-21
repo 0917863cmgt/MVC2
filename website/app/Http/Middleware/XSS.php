@@ -4,10 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
-class AdminValidation
+class XSS
 {
     /**
      * Handle an incoming request.
@@ -18,9 +16,11 @@ class AdminValidation
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()?->role ==  '3' || auth()->user()?->role ==  '2' || !Auth::check()){
-            return redirect('/')->with('fail', 'Route bestaat niet');
-        }
+        $userInput = $request->all();
+        array_walk_recursive($userInput, function (&$userInput) {
+            $userInput = strip_tags($userInput);
+        });
+        $request->merge($userInput);
         return $next($request);
     }
 }

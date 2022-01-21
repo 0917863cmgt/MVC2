@@ -33,8 +33,8 @@
                         <label for="steps" style="margin-bottom: 0">Steps:</label>
                         <textarea name="steps" id="steps"></textarea>
 
-                        <label for="category" style="margin-bottom: 0">Categories:</label>
-                        <select name="category" id="category" multiple>
+                        <label for="categories[]" style="margin-bottom: 0">Categories:</label>
+                        <select name="categories[]" id="category" multiple>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach

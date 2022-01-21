@@ -11,7 +11,7 @@ class AdminUserController extends Controller
     public function index()
     {
         return view('users.index', [
-            'users' => User::all()
+            'users' => User::latest()->filter(request(['search', 'role']))->paginate(10)->withQueryString()
         ]);
     }
 

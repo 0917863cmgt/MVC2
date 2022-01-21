@@ -30,6 +30,21 @@ class Category extends Model
         //
     ];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+        $query->where(fn($query) =>
+
+        $query->where('name','like','%' . $search .'%')
+            ->orWhere('slug','like','%' . $search .'%')
+        )
+        );
+
+        $query->when($filters['parent'] ?? false, fn($query, $parent) =>
+        $query->where('parent_id', $parent)
+        );
+
+    }
+
     public function recipes(){
         return $this->belongsToMany(Recipe::class, 'category_recipe');
     }

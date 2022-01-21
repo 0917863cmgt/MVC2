@@ -44,9 +44,24 @@ class Recipe extends Model
         )
         );
 
-        $query->when($filters['category'] ?? false, fn($query, $category) =>
+        $query->when($filters['protein'] ?? false, fn($query, $protein) =>
         $query->wherehas('categories',fn($query)=>
-        $query->where('category_id', $category))
+        $query->where('category_id', $protein))
+        );
+
+        $query->when($filters['vegetables'] ?? false, fn($query, $vegetables) =>
+        $query->wherehas('categories',fn($query)=>
+        $query->where('category_id', $vegetables))
+        );
+
+        $query->when($filters['cuisine'] ?? false, fn($query, $cuisine) =>
+        $query->wherehas('categories',fn($query)=>
+        $query->where('category_id', $cuisine))
+        );
+
+        $query->when($filters['course'] ?? false, fn($query, $course) =>
+        $query->wherehas('categories',fn($query)=>
+        $query->where('category_id', $course))
         );
 
         $query->when($filters['author'] ?? false, fn($query, $author) =>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -33,9 +34,19 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Comment $comment, Recipe $recipe)
     {
-        //
+        $attributes = request()->validate([
+            'message' => 'required|string|min:10|max:255',
+            'comment_id' => 'integer|min:1'
+        ]);
+        $attributes['user_id'] = auth()->user()->id;
+        $attributes['recipe_id'] = $recipe->id;
+        $attributes['comment_id'] = $comment->id;
+
+        Comment::create($attributes);
+
+        return redirect('/recipe/' . $recipe->slug)->with('succes', 'Uw comment is succesvol geplaatst!');
     }
 
     /**
