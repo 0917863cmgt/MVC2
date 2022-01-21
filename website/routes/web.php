@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminRecipeController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -47,6 +48,8 @@ Route::middleware(['likes','xss'])->group(function (){
 Route::middleware(['auth','xss'])->group(function (){
     Route::get('/favourites', [LikeController::class, 'index']);
 
+    Route::post('/recipe/{recipe:slug}/comment/create', [CommentController::class, 'store']);
+
     Route::get('/user-details', [UserController::class, 'show']);
     Route::get('/user-details/edit', [UserController::class, 'edit']);
     Route::patch('/user-details/update/{user}', [UserController::class, 'update']);
@@ -62,8 +65,8 @@ Route::middleware(['admin','xss'])->group(function (){
     Route::post('/admin/recipes/create', [AdminRecipeController::class, 'store']);
     Route::get('/admin/recipes/edit/{recipe:slug}', [AdminRecipeController::class, 'edit']);
     Route::patch('/admin/recipes/update/{recipe:slug}', [AdminRecipeController::class, 'update']);
+    Route::patch('/admin/recipes/published/update/{recipe:slug}', [AdminRecipeController::class, 'published']);
     Route::delete('/admin/recipes/delete/{recipe:slug}', [AdminRecipeController::class, 'destroy']);
-
 
     Route::get('/admin/users', [AdminUserController::class, 'index']);
     Route::get('/admin/users/create', [AdminUserController::class, 'create']);

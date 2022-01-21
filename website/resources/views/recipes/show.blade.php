@@ -16,6 +16,10 @@
                     </x-recipe.recipe-overview>
                 </div>
                 <div class="row">
+                    <x-recipe.recipe-comment-form
+                        :recipe="$recipe"
+                    >
+                    </x-recipe.recipe-comment-form>
                     <x-recipe.recipe-comments
                         :recipe="$recipe"
                         :comments="$comments"

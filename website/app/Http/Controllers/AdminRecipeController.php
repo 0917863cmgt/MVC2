@@ -90,4 +90,16 @@ class AdminRecipeController extends Controller
         $recipe->delete();
         return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol verwijderd!');
     }
+
+    public function published(Recipe $recipe){
+        if($recipe->published == 1){
+            $attributes['published'] = 0;
+        } else {
+            $attributes['published'] = 1;
+        }
+
+        $recipe->update($attributes);
+
+        return redirect('/admin/recipes')->with('succes', 'Uw recept is succesvol bewerkt!');
+    }
 }

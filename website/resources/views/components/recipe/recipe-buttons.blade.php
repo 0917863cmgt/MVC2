@@ -40,6 +40,7 @@
                     </form>
             </span>
                 <span>
+                <a class="n-t-d" href="/recipe/{{$recipe->slug}}#comment">
                 <button class="highlight-svg-button" type="button">
                     <div class="comment-highlight-hidden">
                         <x-svg.comment-hidden-svg/>
@@ -48,6 +49,7 @@
                         <x-svg.comment-real-svg/>
                     </div>
                 </button>
+                </a>
             </span>
                 <span>
                 <button class="highlight-svg-button" type="button">
@@ -116,7 +118,7 @@
                         </button>
                     </form>
             </span>
-                <span>
+            <span>
                 <button class="highlight-svg-button" type="button">
                     <div class="comment-highlight-hidden">
                         <x-svg.comment-hidden-svg/>
@@ -132,7 +134,7 @@
                         <x-svg.share-hidden-svg/>
                     </div>
                     <div class="share-highlight-real">
-                        <x-svg.share-real-svg/>
+                            <x-svg.share-real-svg/>
                     </div>
                 </button>
             </span>
