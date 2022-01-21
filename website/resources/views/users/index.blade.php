@@ -11,6 +11,7 @@
                     <div class="col-8">
                         <h2 style="margin-top: 50px;margin-bottom: 20px; width: 200px;">All Users</h2>
                         <a href="/admin/users/create" class="n-t-d blue" style="float: right">Create User</a>
+                        <x-user-header></x-user-header>
                     </div>
                     @foreach($users as $user)
                         <div class="col-8">
@@ -20,6 +21,12 @@
                             </x-user.list>
                         </div>
                     @endforeach
+                    <x-pagination :variable="$users"/>
+                    @if($users->count() <1)
+                        <div class="col-6 offset-3 no-articles" style="height: calc(40vh - 150px);">
+                            <p style="text-align: center;">No users found!</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

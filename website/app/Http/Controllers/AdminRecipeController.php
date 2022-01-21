@@ -12,7 +12,7 @@ class AdminRecipeController extends Controller
     public function index()
     {
         return view('recipes.index', [
-            'recipes' => Recipe::all()
+            'recipes' => Recipe::latest()->filter(request(['search', 'category', 'author']))->paginate(10)->withQueryString()
         ]);
     }
 
