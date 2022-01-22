@@ -26,7 +26,13 @@ class UserController extends Controller
             'profile_image' => 'image',
         ]);
         $attributes['role'] = auth()->user()->role;
-        $attributes['password'] = bcrypt($attributes['password']);
+
+        if(isset($attributes['password']) & strlen($attributes['password']) > 8){
+            $attributes['password'] = bcrypt($attributes['password']);
+        } else {
+            unset($attributes['password']);
+        }
+
         if(isset( $attributes['profile_image'])){
             $attributes['profile_image'] = request()->file('profile_image')->store('profile_images');
         }
