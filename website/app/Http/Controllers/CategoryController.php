@@ -57,7 +57,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.test
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
