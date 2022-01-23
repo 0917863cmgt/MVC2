@@ -1,5 +1,5 @@
 @props(['recipe'])
-<div class="col-3">
+<div style="min-height:602px;max-height: 602px;" class="col-3">
     <a href="/recipe/{{$recipe->slug}}" style="text-decoration: none;color:inherit; max-width: inherit">
         <img src="{{asset('storage/' . $recipe->image) ?: $recipe->image }}" style="max-width: inherit">
         <h3>{{Illuminate\Support\Str::limit($recipe->title,35,"...")}}</h3>
