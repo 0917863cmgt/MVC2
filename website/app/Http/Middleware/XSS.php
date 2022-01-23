@@ -21,6 +21,6 @@ class XSS
             $userInput = strip_tags($userInput);
         });
         $request->merge($userInput);
-        return $next($request);a
+        return $next($request);
     }
 }
