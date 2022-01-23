@@ -26,10 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(['xss'])->group(function (){
     Route::get('/', [HomepageController::class, 'index']);
-
     Route::get('/recipe/{recipe:slug}', [RecipeController::class, 'show']);
-    Route::post('/recipe/{recipe:slug}/create', [LikeController::class, 'store']);
-    Route::post('/recipe/{recipe:slug}/destroy/{like:id}', [LikeController::class, 'destroy']);
 });
 
 Route::middleware(['guest','xss'])->group(function (){
@@ -39,6 +36,10 @@ Route::middleware(['guest','xss'])->group(function (){
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
 
+});
+Route::middleware(['auth','xss'])->group(function (){
+    Route::post('/recipe/{recipe:slug}/create', [LikeController::class, 'store']);
+    Route::post('/recipe/{recipe:slug}/destroy/{like:id}', [LikeController::class, 'destroy']);
 });
 
 Route::middleware(['auth', 'commentLikes','xss'])->group(function (){
