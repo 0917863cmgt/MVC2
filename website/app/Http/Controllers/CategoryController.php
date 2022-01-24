@@ -47,8 +47,8 @@ class CategoryController extends Controller
         $attributes = request()->validate([
             'is_parent' => 'required|integer|min:0|max:1',
             'parent_id' => 'integer|min:1',
-            'name' => [Rule::unique('categories', 'name'), 'string', 'min:3' ],
-            'slug' => [Rule::unique('categories', 'slug'), 'string', 'min:3' ]
+            'name' => [Rule::unique('categories', 'name'), 'string', 'min:2' ],
+            'slug' => [Rule::unique('categories', 'slug'), 'string', 'min:2' ]
         ]);
 
         Category::create($attributes);
@@ -92,8 +92,8 @@ class CategoryController extends Controller
         $attributes = request()->validate([
             'is_parent' => 'required|integer|min:0|max:1',
             'parent_id' => 'integer|min:1',
-            'name' => [Rule::unique('categories', 'name')->ignore($category->id), 'string', 'min:3' ],
-            'slug' => [Rule::unique('categories', 'slug')->ignore($category->id), 'string', 'min:3' ]
+            'name' => [Rule::unique('categories', 'name')->ignore($category->id), 'string', 'min:2' ],
+            'slug' => [Rule::unique('categories', 'slug')->ignore($category->id), 'string', 'min:2' ]
         ]);
 
         if($attributes['parent_id'] == null && $attributes['is_parent'] == 1){
